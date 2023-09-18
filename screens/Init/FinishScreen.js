@@ -1,21 +1,11 @@
 import { View, Text, Image, SafeAreaView, TouchableOpacity, TextInput} from 'react-native'
-import React, {useLayoutEffect, useState} from 'react'
+import React, {useLayoutEffect} from 'react'
 import { StatusBar } from 'expo-status-bar';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 const FinishScreen = ({navigation, route}) => {
-    const { name } = route.params;
-    const [horaAcorda, setHoraAcorda] = useState(new Date());
-    const [showPicker, setShowPicker] = useState(false);
-
-
-    const onChange = (event, selectedDate) => {
-      const currentDate = selectedDate || horaAcorda;
-      setShowPicker(Platform.OS === 'ios'); 
-      setHoraAcorda(currentDate);
-    };
-
+    const { name } = route.params;    
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
@@ -36,17 +26,7 @@ const FinishScreen = ({navigation, route}) => {
 
         <View className='pt-12 mx-5 mb-4' >
             <Text className='text-white text-3xl pt-6 mx-5 '>2. Que horas você acorda geralmente?</Text>
-            <View className='bg-coralLight mt-3 rounded-md items-center p-3'>
-             <DateTimePicker
-          testID="dateTimePicker"
-          value={horaAcorda}
-          mode="time"
-          is24Hour={true}
-          display="default"
-          onChange={onChange}
-          themeVariant="light" //ios
-        />
-        </View>
+            <TextInput type='text' className='bg-white text-bg h-10 mx-4 rounded-full mt-12 px-2'/>
         </View>
 
         <TouchableOpacity className='bg-white rounded-xl p-4 text-center mt-12 flex flex-row justify-between items-center mx-12' onPress={goToLetsStartScreen}>
